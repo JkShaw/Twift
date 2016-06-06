@@ -1,0 +1,100 @@
+
+Code Conventions for the JavaScript Programming Language
+---------------------------------------------------------
+
+This is a set of coding conventions and rules for use in JavaScript programming.
+
+1. Indentation
+--------------
+Four spaces are used for indentation.
+
+2. Line Length
+--------------
+
+It is 100 characters per line. 
+
+3. Comments
+-----------
+
+Comments are used before every function to define it's task. They are also used to tell the use of a particular code block.
+
+Ex: // logic for getting the value from the virtual keyboard
+
+4. Variable Declarations
+------------------------
+
+All variables are declared before used. The variables naming convention involves lower pascal case with underscore(_) between two words.
+
+   var incorrect_guesses = 0;       // counter to keep track of the no.of incorrect guesses
+   var value_to_use;        	    // array to store the pool set for the game
+
+Use of global variables should be minimized.
+
+5. Function Declarations
+------------------------
+
+All functions should be declared before they are used. 
+Function naming convention follows lower pascal case with underscore(_).
+
+Ex : function volume_slider() {
+	// function body
+});
+
+There is no space between the name of a function and the ( (left parenthesis) of its parameter list.
+There is one space between the ) (right parenthesis) and the { (left curly brace) that begins the statement body.
+The body itself is indented four spaces. The } (right curly brace) is aligned with the line containing the beginning of the declaration of the function.
+
+6. Statements
+-------------
+
+Simple Statements
+-----------------
+
+Each line should contain one statement. Put a ; (semicolon) at the end of every simple statement.
+
+if Statement
+------------
+
+The if class of statements is used having the following form:
+
+    if (condition) {
+        statements
+    }
+
+    if (condition) {
+        statements
+    } else {
+        statements
+    }
+
+    if (condition) {
+        statements
+    } else if (condition) {
+        statements
+    } else {
+        statements
+    }
+
+for Statement
+-------------
+
+A for class of statements is used having the following form:
+
+    for (initialization; condition; update) {
+        statements
+    }
+
+while Statement
+---------------
+
+A while statement is used having the following form:
+
+    while (condition) {
+        statements
+    }
+
+ Whitespace
+-------------
+
+Blank lines improve readability by setting off sections of code that are logically related.
+
