@@ -1,0 +1,11 @@
+sudo -u postgres psql
+
+postgres=# create database projectxdb;
+postgres=# create role projectxadmin with login password 'projectx@123';
+
+
+postgres=# GRANT ALL PRIVILEGES ON DATABASE projectxdb TO projectxadmin;
+
+postgres=# ALTER USER projectxadmin CREATEDB;
+
+
