@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_PATH = os.path.join(BASE_DIR, 'static')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -31,19 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #Third party apps
-    'crispy_forms',
-    'registration',
-    #My apps
-    'twift',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -62,7 +55,7 @@ ROOT_URLCONF = 'projectx.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,8 +63,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
             ],
         },
     },
@@ -88,7 +79,7 @@ DATABASES = {
           'ENGINE': 'django.db.backends.postgresql_psycopg2',
           'NAME': 'projectxdb',
           'USER': 'projectxadmin',
-          'PASSWORD': 'projectx@123',
+          'PASSWORD':'projectx@123',
           'HOST': 'localhost',
           'PORT': '5432',
       }
@@ -132,32 +123,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    STATIC_PATH,
-)
-#If a user want to access a method that that requires login and the user is not logged in then it will redirect the user to login page.
-#import django.contrib.auth
-#django.contrib.auth.LOGIN_URL = '/'
-
-#LOGIN_REDIRECT_URL = '/' # It means home view
-
-#Django registration redux setting
-#REGISTRATION_OPEN = True # If True, users can register
-ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
-REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
-#LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
-                                # and are trying to access pages requiring authentication
-
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'jyotishshaw33@gmail.com'
-EMAIL_HOST_PASSWORD = 'S$E@mf45l'
-
-# for SSL only
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-SITE_ID = 1

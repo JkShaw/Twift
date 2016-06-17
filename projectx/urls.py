@@ -13,9 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import views
+from twift.forms import LoginForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^twift/', include('twift.urls')),
+    #url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}),
+    #url(r'^logout/$', views.logout, {'next_page': '/login'}),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 ]
