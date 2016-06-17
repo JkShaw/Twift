@@ -40,20 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
-=======
+
     #Third party apps
     'crispy_forms',
     'registration',
     #My apps
     'twift',
->>>>>>> 05bb589620131d4dae37299df6484db41d3fd395
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -72,11 +70,11 @@ ROOT_URLCONF = 'projectx.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-<<<<<<< HEAD
+
         'DIRS': ['templates'],
-=======
+
         'DIRS': ["templates"],
->>>>>>> 05bb589620131d4dae37299df6484db41d3fd395
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,13 +85,13 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-<<<<<<< HEAD
+
                 #'allauth.account.context_processors.account',
                 #'allauth.socialaccount.context_processors.socialaccount'
-=======
+
                 'django.core.context_processors.media',
                 'django.core.context_processors.static',
->>>>>>> 05bb589620131d4dae37299df6484db41d3fd395
+
             ],
         },
     },
@@ -205,4 +203,3 @@ EMAIL_HOST_PASSWORD = 'S$E@mf45l'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-SITE_ID = 1
