@@ -11,3 +11,66 @@
     </div>
 </div>
 {% endblock %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>Box Battle</title>
+    <style>
+        html, body, .container-table {
+            height: 100%;
+        }
+        .container-table {
+            display: table;
+        }
+        .vertical-center-row {
+            display: table-cell;
+            vertical-align: middle;
+            width: 500px;
+            margin-bottom: 25%;
+        }
+        .rowspace {
+            margin-bottom: 20px;
+        }
+    </style>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#offerRide').click(function(e) {
+                //Go to offer ride page
+            });
+            $('#findRide').click(function(e) {
+                //Go to find ride page
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container container-table">
+        <div class="row vertical-center-row" style="background:lightseagreen">
+            <h2 class="text-center">Your Rides</h2>
+            <div class="text-center col-md-4 col-md-offset-4 rowspace">
+                <button id="offerRide"
+                        type="button"
+                        class="btn btn-info btn-lg center-block"
+                        data-toggle="modal">OFFER A RIDE</button>
+            </div>
+            <div class="text-center col-md-4 col-md-offset-4 rowspace">
+                <button id="findRide"
+                        type="button"
+                        class="btn btn-info btn-lg center-block"
+                        data-toggle="modal">FIND A RIDE</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
