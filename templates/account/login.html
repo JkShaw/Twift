@@ -8,9 +8,9 @@
 {% block content %}
     <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col m12 s12">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col m12 s12">
           <div class="page-header">
             <h1>
               Twift! <small>Two wheeler lift</small>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col m6 s6">
           <div class="jumbotron">
             <h2>
               Hiya!!!
@@ -31,20 +31,18 @@
             </p>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="tabbable" id="tabs-784480">
-            <ul class="nav nav-tabs" data-tabs="tabs">
-              <li class="active">
-                <a href="#panel-483688" data-toggle="tab">Login</a>
-              </li>
-              <li>
-                <a href="#panel-458590" data-toggle="tab">Sign up</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="panel-483688">
-               <div class="col-md-12">
-                 <h1>{% trans "Sign In" %}</h1>
+        <div class="col m6 s6">
+        <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#test1">Sign up</a></li>
+        <li class="tab col s3"><a class="active" href="#test2">Login</a></li>
+        <li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>
+        <li class="tab col s3"><a href="#test4">Test 4</a></li>
+      </ul>
+    </div>
+    <div id="test1" class="col s12">
+                       <h1>{% trans "Sign In" %}</h1>
 
 {% get_providers as socialaccount_providers %}
 
@@ -70,7 +68,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
+<form class="login col s12" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
   {{ form.as_p }}
   {% if redirect_field_value %}
@@ -79,18 +77,15 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
   <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
 </form>
-</div>
 
-
-                </p>
-              </div>
-              <div class="tab-pane" id="panel-458590">
-                <p>
+    </div>
+    <div id="test2" class="col s12"><p>
                   Howdy, I'm in Section 2.
-                </p>
-              </div>
-            </div>
-          </div>
+                </p></div>
+    <div id="test3" class="col s12">Test 3</div>
+    <div id="test4" class="col s12">Test 4</div>
+  </div>
+  
         </div>
       </div>
     </div>
