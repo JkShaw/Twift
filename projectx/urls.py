@@ -24,11 +24,11 @@ from twift.forms import LoginForm
 admin.autodiscover()
 
 urlpatterns = [
+    url(r'^$', include('twift.urls')),
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/profile/', TemplateView.as_view(template_name='account/profile.html')),
-    url(r'^twift/', include('twift.urls')),
     #url(r'^login/$', views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}),
     #url(r'^logout/$', views.logout, {'next_page': '/login'}),
     url(r'^accounts/', include('registration.backends.default.urls')),

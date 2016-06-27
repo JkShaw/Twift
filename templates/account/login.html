@@ -1,4 +1,4 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
 {% load account socialaccount %}
@@ -6,89 +6,63 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
-  <div class="row">
-    <div class="col m12 s12">
-      <div class="row">
+<div class="container-fluid">
+    <div class="row">
         <div class="col m12 s12">
-          <div class="page-header">
-            <h1>
-              Twift! <small>Two wheeler lift</small>
-            </h1>
-          </div>
+            <div class="row">
+                <div class="col m12 s12">
+                    <div class="page-header">
+                        <h1>Twift! <small>Two wheeler lift</small></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col m6 s6">
+                    <div class="jumbotron">
+                        <h2>Hiya!!!</h2>
+                        <p>Two wheeler lift enables people with bikes/scooters to allow drivers to share their rides with passenger use</p>
+                        <p><a class="btn btn-primary btn-large" href="#">Learn more</a></p>
+                    </div>
+                </div>
+                <div class="col m6 s6">
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="tabs">
+                                <li class="tab col s3"><a href="#test1">Sign In</a></li>
+                            </ul>
+                        </div>
+                        <div id="test1" class="col s12">
+                            <h1>{% trans "Sign In" %}</h1>
+                            {% get_providers as socialaccount_providers %}
+                            {% if socialaccount_providers %}
+                                <p>{% blocktrans with site.name as site_name %}Please sign in with one
+                                of your existing third party accounts. Or, <a href="/accounts/register">sign up</a>
+                                for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+                                <div class="socialaccount_ballot">
+                                    <ul class="socialaccount_providers">
+                                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                                    </ul>
+                                    <div class="login-or">{% trans 'or' %}</div>
+                                </div>
+                                {% include "socialaccount/snippets/login_extra.html" %}
+                            {% else %}
+                                <p>{% blocktrans %}If you have not created an account yet, then please
+                                <a href="/accounts/register">sign up</a> first.{% endblocktrans %}</p>
+                            {% endif %}
+                            <form class="login col s12" method="POST" action="{% url 'account_login' %}">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                {% endif %}
+                                <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                                <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col m6 s6">
-          <div class="jumbotron">
-            <h2>
-              Hiya!!!
-            </h2>
-            <p>Two wheeler lift enables people with bikes/scooters to allow drivers to share their rides with passenger use
-            </p>
-            <p>
-              <a class="btn btn-primary btn-large" href="#">Learn more</a>
-            </p>
-          </div>
-        </div>
-        <div class="col m6 s6">
-        <div class="row">
-    <div class="col s12">
-      <ul class="tabs">
-        <li class="tab col s3"><a href="#test1">Sign up</a></li>
-        <li class="tab col s3"><a class="active" href="#test2">Login</a></li>
-        <li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>
-        <li class="tab col s3"><a href="#test4">Test 4</a></li>
-      </ul>
     </div>
-    <div id="test1" class="col s12">
-                       <h1>{% trans "Sign In" %}</h1>
-
-{% get_providers as socialaccount_providers %}
-
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
-<div class="socialaccount_ballot">
-
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
-
-  <div class="login-or">{% trans 'or' %}</div>
-
-</div>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-{% endif %}
-
-<form class="login col s12" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
-
-    </div>
-    <div id="test2" class="col s12"><p>
-                  Howdy, I'm in Section 2.
-                </p></div>
-    <div id="test3" class="col s12">Test 3</div>
-    <div id="test4" class="col s12">Test 4</div>
-  </div>
-  
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 {% endblock %}

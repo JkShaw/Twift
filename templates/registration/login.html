@@ -6,7 +6,7 @@
 <div class="col-sm-6 col-sm-offset-3">
 <form method="post" action="/twift/">
   {% csrf_token %}
-  {{ form |crispy }}
+  {{ form |crispy  }}
 
   <div class="row">
     <input class="btn btn-primary" type="submit" value="{% trans 'Log in' %}" />
