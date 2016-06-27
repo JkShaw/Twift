@@ -121,7 +121,7 @@ WSGI_APPLICATION = 'projectx.wsgi.application'
 
 DATABASES = {
       'default': {
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'ENGINE': 'django.contrib.gis.db.backends.postgis',
           'NAME': 'projectxdb',
           'USER': 'projectxadmin',
           'PASSWORD': 'projectx@123',
@@ -141,7 +141,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
-    {
+    {   
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
