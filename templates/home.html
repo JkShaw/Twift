@@ -1,13 +1,62 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>TWIFT</title>
+    <style>
+        html, body, .container-table {
+            height: 100%;
+        }
+        .container-table {
+            display: table;
+        }
+        .vertical-center-row {
+            display: table-cell;
+            vertical-align: middle;
+            width: 500px;
+            margin-bottom: 25%;
+        }
+        .rowspace {
+            margin-bottom: 20px;
+        }
+    </style>
 
-{% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="jumbotron">
-            <h1>Hello</h1>
-            <p>You are on your Dashboard</p>
+    <script>
+        $(document).ready(function() {
+            $('#rideOffer').click(function(e) {
+                //go to offer ride
+            });
+            $('#rideFind').click(function(e) {
+                //go to find ride
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container container-table">
+        <div class="row vertical-center-row" style="background:lightseagreen">
+            <h2 class="text-center">TWIFT Ride Share</h2>
+            <div class="text-center col-md-4 col-md-offset-4 rowspace">
+                <button id="rideOffer"
+                        type="button"
+                        class="btn btn-info btn-lg center-block"
+                        style="background:#ff615d"
+                        data-toggle="modal">OFFER RIDE</button>
+            </div>
+            <div class="text-center col-md-4 col-md-offset-4 rowspace">
+                <button id="rideFind"
+                        type="button"
+                        class="btn btn-info btn-lg center-block"
+                        style="background:rgba(203, 255, 84, 0.67)"
+                        data-toggle="modal">FIND A RIDE</button>
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}
+
+</body>
+</html>
