@@ -6,33 +6,13 @@
 
 {% block content %}
 <style>
-    html, body, .container-table {
+    html, body{
         height: 100%;
-    }
-    .container-table {
-        display: table;
-    }
-    .vertical-center-row {
-        display: table-cell;
-        vertical-align: middle;
-        width: 500px;
-        margin-bottom: 25%;
     }
     .rowspace {
         margin-bottom: 20px;
     }
 </style>
-
-<script>
-    $(document).ready(function() {
-        $('#rideOffer').click(function(e) {
-            //go to offer ride
-        });
-        $('#rideFind').click(function(e) {
-            //go to find ride
-        });
-    });
-</script>
 
 <div class="container">
     <div class="row" style="background:lightseagreen">
@@ -54,4 +34,19 @@
         </div>
     </div>
 </div>
+
+{% endblock %}
+
+{% block script_content %}
+<script>
+    $(document).ready(function() {
+        $('#rideOffer').click(function(e) {
+            console.log("Inside ride offer");
+            window.location.href='/twift/offerRide';
+        });
+        $('#rideFind').click(function(e) {
+            //go to find ride
+        });
+    });
+</script>
 {% endblock %}
