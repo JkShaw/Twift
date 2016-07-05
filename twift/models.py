@@ -50,7 +50,7 @@ class OfferRides(models.Model):
  	seats = models.IntegerField()
  	datePublished = models.DateTimeField(auto_now_add=True, auto_now=False)
 
- class availRideModel(models.Model):
+class availRideModel(models.Model):
 	uid=models.ForeignKey(User)
 	source=models.CharField(max_length=100)
 	destination=models.CharField(max_length=100)

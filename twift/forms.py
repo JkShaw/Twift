@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
-from .models import availRideModel
+from .models import availRideModel,OfferRides
 
 # If you don't do this you cannot use Bootstrap CSS
 class LoginForm(AuthenticationForm):

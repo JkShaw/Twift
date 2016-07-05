@@ -3,3 +3,4 @@ FEMALE = 'f'
 GENDER_CHOICES=(
 		(MALE,'Male'),
 		(FEMALE,'Female'),
+		)
