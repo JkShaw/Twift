@@ -1,16 +1,26 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
-from .models import OfferRides
+from .models import availRideModel
 
 # If you don't do this you cannot use Bootstrap CSS
-
-
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label="Username", max_length=30,
                                widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'username'}))
     password = forms.CharField(label="Password", max_length=30,
                                widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'password'}))
 
+
+class availRide(forms.Form):
+	
+	source = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'source'}))
+	destination = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'destination'}))
+	sourcex = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'sourcex'}))
+	sourcey = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'sourcey'}))
+	destinationx = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'destinationx'}))
+	destinationy = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'destinationy'}))
+	duration =forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'duration','value':'0'}))
+	class Meta:
+		model = availRideModel
 
 class OfferRideForm(forms.ModelForm):
     CHOICES = (('1', '1',), ('2', '2',))
