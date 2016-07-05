@@ -5,18 +5,42 @@
 {% block content %}
  
 {% if user %}
-    <h1>Welcome, {{user.first_name}}</h1>
-    <p>Following is the Extra information that facebook has provided to allauth:</p>
-    {% for account in user.socialaccount_set.all %}
-        <h2 style="text-transform:capitalize;">{{ account.provider }} account data</h2>
-        <p><img width="50" height="50" src="{{ account.get_avatar_url }}" /></p>
-        <p>UID: <a href="{{account.extra_data.link }}">{{ account.uid }}</a></p>
-        <p>Username: {{ account.extra_data.username }}</p>
-           <p>Email: {{ account.extra_data.email }}</p>
-        <p>First Name: {{ account.extra_data.first_name }} {{ account.extra_data.given_name }}</p>
-        <p>Last Name: {{ account.extra_data.last_name }} {{ account.extra_data.family_name }}</p>
-        <p>Profile Link: <a href="{{ account.extra_data.link }}">{{ account.extra_data.link }}</a></p>
-    {% endfor %}
+<div class="container">
+    <div class="row" style="background:lightseagreen">
+        <div class="container white">
+        <h2 class="text-center"><mark class="grey" style="font-family: 'Droid Sans Georgian'">Welcome, {{user.first_name}}</mark></h2>
+
+        {% for account in user.socialaccount_set.all %}
+            <h6 style="text-transform:capitalize;">{{ account.provider }} Account Information:</h6>
+            <div class="">
+                <p><img width="150" height="150" src="{{ account.get_avatar_url }}" /></p>
+            </div>
+            <table class="table table-striped">
+                <tr>
+                    <td>Username</td>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ account.extra_data.email }}</td>
+                </tr>
+                <tr>
+                    <td>First Name</td>
+                    <td>{{ account.extra_data.first_name }} {{ account.extra_data.given_name }}</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>{{ account.extra_data.last_name }} {{ account.extra_data.family_name }}</td>
+                </tr>
+                <tr>
+                    <td>Profile Link</td>
+                    <td><a href="{{ account.extra_data.link }}">{{ account.extra_data.link }}</a></td>
+                </tr>
+            </table>
+        {% endfor %}
+        </div>
+    </div>
+</div>
 {% endif %}
  
 {% endblock content %}
