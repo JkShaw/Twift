@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="background:lightseagreen">
+        <h2 class="text-center">Twift! Two wheeler lift</h2>
+        <h4 class="text-center">Ride Share!!</h4><br/><br/><br/>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDNDQMWfiSliKDmlNRokulCXBLKZBebBnQ"></script>
+
+        <script>
+            function calculateRoute(from, to) {
+                // Center initialized to Naples, Italy
+                var myOptions = {
+                    zoom: 10,
+                    center: new google.maps.LatLng(40.84, 14.25),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                // Draw the map
+                var mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
+
+                var directionsService = new google.maps.DirectionsService();
+                var directionsRequest = {
+                    origin: from,
+                    destination: to,
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING,
+                    unitSystem: google.maps.UnitSystem.METRIC
+                };
+                directionsService.route(
+                    directionsRequest,
+                    function(response, status)
+                    {
+                        if (status == google.maps.DirectionsStatus.OK)
+                        {
+                            new google.maps.DirectionsRenderer({
+                                map: mapObject,
+                                directions: response
+                            });
+                        }
+                    else
+                        $("#error").append("Unable to retrieve your route<br />");
+                  }
+                );
+              }
+        </script>
+
+        <script type="text/javascript">
+            google.maps.event.addDomListener(window, 'load', function () {
+                var srcplaces = new google.maps.places.Autocomplete(document.getElementById('id_source'));
+                google.maps.event.addListener(srcplaces, 'place_changed', function () {
+                    var place = srcplaces.getPlace();
+                    var address = place.formatted_address;
+                    var latitude = place.geometry.location.lat();
+                    var longitude = place.geometry.location.lng();
+                    var mesg = "Address: " + address;
+                    mesg += "\nLatitude: " + latitude;
+                    mesg += "\nLongitude: " + longitude;
+                    alert(mesg);
+                    $('#id_lat_src').val(latitude);
+                    $('#id_lng_src').val(longitude);
+                });
+
+                var destplaces = new google.maps.places.Autocomplete(document.getElementById('id_destination'));
+                google.maps.event.addListener(destplaces, 'place_changed', function () {
+                    var place = destplaces.getPlace();
+                    var address = place.formatted_address;
+                    var latitude = place.geometry.location.lat();
+                    var longitude = place.geometry.location.lng();
+                    var mesg = "Address: " + address;
+                    mesg += "\nLatitude: " + latitude;
+                    mesg += "\nLongitude: " + longitude;
+                    alert(mesg);
+                    $('#id_lat_dest').val(latitude);
+                    $('#id_lng_dest').val(longitude);
+                });
+            });
+        </script>
+
+        <style type="text/css">
+            #map {
+                width: 600px;
+                height: 400px;
+                margin-top: 10px;
+            }
+        </style>
+
+        <div class="container" style="background: white">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <br />
+                <input type="button" value="Route" id="route" />
+                <input type="submit" value="Publish" />
+            </form>
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script_content %}
+    <script>
+        $(document).ready(function() {
+            // If the browser supports the Geolocation API
+            if (typeof navigator.geolocation == "undefined") {
+                $("#error").text("Your browser doesn't support the Geolocation API");
+                return;
+            }
+
+            $('#route').click(function(){
+                event.preventDefault();
+                calculateRoute($("#id_source").val(), $("#id_destination").val());
+            });
+        });
+    </script>
+{% endblock %}
