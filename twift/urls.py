@@ -9,7 +9,5 @@ urlpatterns = [
     url(r'^thanks/', TemplateView.as_view(template_name='twift/thanks.html'),
         name='thanks'),
     url(r'^availRide',views.avail_ride, name='avail_ride'),
-    url(r'^offerRide/',
-        TemplateView.as_view(template_name='twift/offerRide.html'),
-        name='offerRide'),
+    url(r'^offerNewRide/', views.offer_ride, name='offer_ride'),
 ]

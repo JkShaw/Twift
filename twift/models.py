@@ -4,6 +4,7 @@ from django.contrib.postgres.fields import JSONField
 from datetime import datetime 
 from . import constants
 
+
 # Create your models here.
 class UserDetails(models.Model):
 	
@@ -17,11 +18,13 @@ class DriverUsers(models.Model):
 	uid =models.ForeignKey(User)
 	driverlicense=models.CharField(max_length=20)
 
+
 class VehicleDetails(models.Model):
 	vehicleregistration=models.CharField(max_length=20)
 	vehiclemodel=models.CharField(max_length=20)
 	milage=models.FloatField()
 	owner=models.ForeignKey(User)
+
 
 class Journey(models.Model):
 	passenger=models.ForeignKey(User,related_name='the_passsenger')
@@ -32,23 +35,24 @@ class Journey(models.Model):
 	destinationy=models.FloatField()
 	waypoints=JSONField(default=list([]))
 
+
 class JourneyFeedback(models.Model):
 	uid=models.ForeignKey(User)
 	journeyid=models.ForeignKey(Journey)
 	feedback=models.CharField(max_length=100)
 
 
-
 class OfferRides(models.Model):
- 	user = models.ForeignKey(DriverUsers)
- 	source = models.CharField(max_length=255)
- 	destination = models.CharField(max_length=255)
- 	lat_src = models.FloatField()
- 	lng_src = models.FloatField()
- 	lat_dest = models.FloatField()
- 	lng_dest = models.FloatField()
- 	seats = models.IntegerField()
- 	datePublished = models.DateTimeField(auto_now_add=True, auto_now=False)
+	user = models.ForeignKey(DriverUsers)
+	source = models.CharField(max_length=255)
+	destination = models.CharField(max_length=255)
+	lat_src = models.FloatField()
+	lng_src = models.FloatField()
+	lat_dest = models.FloatField()
+	lng_dest = models.FloatField()
+	seats = models.IntegerField()
+	datePublished = models.DateTimeField(auto_now_add=True, auto_now=False)
+
 
 class availRideModel(models.Model):
 	uid=models.ForeignKey(User)
