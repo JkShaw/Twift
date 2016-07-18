@@ -10,4 +10,6 @@ urlpatterns = [
         name='thanks'),
     url(r'^availRide',views.avail_ride, name='avail_ride'),
     url(r'^offerNewRide/', views.offer_ride, name='offer_ride'),
+    url(r'^getDriverDetails/', views.driver_details, name='driver_details'),
+    url(r'^getCustomers/', views.get_customers, name='get_customers'),
 ]

@@ -5,8 +5,14 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row" style="background:lightseagreen">
+<style>
+    #mainContainer {
+        width: 100% !important;
+    }
+</style>
+
+<div class="container" id="mainContainer">
+    <div class="row">
         <h2 class="text-center">Twift! Two wheeler lift</h2>
         <h4 class="text-center">Ride Share!!</h4><br/><br/><br/>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDNDQMWfiSliKDmlNRokulCXBLKZBebBnQ"></script>
@@ -85,16 +91,37 @@
             }
         </style>
 
-        <div class="container" style="background: white">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form }}
-                <br />
-                <input type="button" value="Route" id="route" />
-                <input type="submit" value="Publish" />
-            </form>
-            <div id="map"></div>
+        <!-- Left Panel -->
+        <div class="col-xs-6">
+            <div class="container" style="background: white">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <br />
+                    <input type="button" value="Route" id="route" />
+                    <input type="submit" value="Publish" />
+                    <input type="button" value="Show Finders" id="customers"/>
+                </form>
+                <div id="map"></div>
+            </div>
         </div>
+
+        <!-- Right Panel -->
+        <div class="col-xs-6">
+            <div class="container">
+                <div class="row">
+                    <table class="bordered highlight lime lighten-3"id="location">
+                        <thead>
+                            <th>Name</th>
+                             <th>Source</th>
+                             <th>Destination</th>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 {% endblock %}
@@ -112,6 +139,29 @@
                 event.preventDefault();
                 calculateRoute($("#id_source").val(), $("#id_destination").val());
             });
+
+            $('#customers').click(function() {
+                event.preventDefault();
+                var src = $("#id_source").val();
+                var dest = $("#id_destination").val();
+                calculateRoute(src, dest);
+
+                $.get('/twift/getCustomers/', {source: src, destination: dest}, function(data){
+                    output = "";
+                    var jsonData = $.parseJSON(data);
+
+                    $('#location tbody').empty(); 
+                    for(var i=0; i<jsonData.length; i++) {
+                        $("#location tbody").append(
+                            "<tr>"
+                                +"<td>"+jsonData[i].uid__first_name+" "+
+                                    jsonData[i].uid__last_name+"</td>"
+                                +"<td>"+jsonData[i].source+"</td>"
+                                +"<td>"+jsonData[i].destination+"</td>"
+                            +"</tr>" );
+                    }
+                });
+            })
         });
     </script>
 {% endblock %}

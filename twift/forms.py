@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
-from .models import availRideModel,OfferRides
+from .models import availRideModel, OfferRides, DriverUsers
 
 # If you don't do this you cannot use Bootstrap CSS
 class LoginForm(AuthenticationForm):
@@ -38,3 +38,13 @@ class OfferRideForm(forms.ModelForm):
     class Meta:
         model = OfferRides
         fields = ('source',)
+
+
+class DriverDetailsForm(forms.ModelForm):
+    driverlicense = forms.CharField( label="Driver License",
+                                        required=True,
+                                        widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = DriverUsers
+        fields = ('driverlicense',)

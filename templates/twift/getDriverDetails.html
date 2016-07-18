@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<style>
+    #mainContainer {
+        width: 100% !important;
+    }
+</style>
+
+<div class="container" id="mainContainer" style="background:lightseagreen">
+    <div class="row" style="background:lightseagreen">
+        <h2 class="text-center">Twift! Two wheeler lift</h2>
+        <h4 class="text-center">Ride Share!!</h4><br/><br/><br/>
+
+        <div class="container" style="background: white">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <br />
+                <input type="submit" value="Add Details" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script_content %}
+{% endblock %}
