@@ -26,18 +26,16 @@ class DriverUsers(models.Model):
         primary_key=True,
     )
 	driverlicense=models.CharField(max_length=20)
+	
+	def __str__(self):
+		return self.driverlicense
 
-    def __str__(self):
-        return self.driverlicense
-
-
-
+        
 class VehicleDetails(models.Model):
     vehicleregistration=models.CharField(max_length=20)
     vehiclemodel=models.CharField(max_length=20)
     milage=models.FloatField()
     owner=models.ForeignKey(User)
-
     def __str__(self):
         return self.vehicleregistration
 
@@ -59,7 +57,6 @@ class JourneyFeedback(models.Model):
 
 
 class OfferRides(models.Model):
-<<<<<<< HEAD
 	user = models.ForeignKey(DriverUsers)
 	source = models.CharField(max_length=255)
 	destination = models.CharField(max_length=255)

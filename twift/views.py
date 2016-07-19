@@ -62,7 +62,7 @@ def driver_details(request):
             try:
                 DriverUsers.objects.create(**data)
                 return HttpResponseRedirect(reverse('offer_ride'))
-            except Exception, e:
+            except Exception as e:
                 print(data)
                 print(str(e))
                 return HttpResponseRedirect(reverse('offer_ride'))
