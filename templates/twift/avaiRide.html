@@ -5,6 +5,7 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+{% load staticfiles %}
 <style>
     html, body{
         height: 100%;
@@ -19,43 +20,7 @@
         <h2 class="text-center">Twift! Two wheeler lift</h2>
         <h4 class="text-center">Ride Share!!</h4><br/><br/><br/>
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDNDQMWfiSliKDmlNRokulCXBLKZBebBnQ"></script>
-        <script type="text/javascript">
-            google.maps.event.addDomListener(window, 'load', function () {
-                var srcplaces = new google.maps.places.Autocomplete(document.getElementById('srcPlaces'));
-                google.maps.event.addListener(srcplaces, 'place_changed', function () {
-                    var place = srcplaces.getPlace();
-                    var address = place.formatted_address;
-                    var latitude = place.geometry.location.lat();
-                    var longitude = place.geometry.location.lng();
-                    document.getElementById("id_source").value=address;
-                    document.getElementById("id_sourcex").value=longitude;
-                    document.getElementById("id_sourcey").value=latitude;
-
-                    var mesg = "Address: " + address;
-                    mesg += "\nLatitude: " + latitude;
-                    mesg += "\nLongitude: " + longitude;
-                    console.log(mesg);
-                    console.log(place);
-                    
-                });
-
-                var destplaces = new google.maps.places.Autocomplete(document.getElementById('destPlaces'));
-                google.maps.event.addListener(destplaces, 'place_changed', function () {
-                    var place = destplaces.getPlace();
-                    var address = place.formatted_address;
-                    var latitude = place.geometry.location.lat();
-                    var longitude = place.geometry.location.lng();
-                    document.getElementById("id_destination").value=address;
-                    document.getElementById("id_destinationx").value=longitude;
-                    document.getElementById("id_destinationy").value=latitude;
-
-                    var mesg = "Address: " + address;
-                    mesg += "\nLatitude: " + latitude;
-                    mesg += "\nLongitude: " + longitude;
-                     
-                });
-            });
-        </script>
+     
 
         <div class="container" style="background: white">
         <h1 class="header center black-text">Find a Ride</h1>
@@ -81,21 +46,57 @@
             <div class="row">
                 <div class="form-group">
                     <div class="text-center col-md-2 col-md-offset-4 rowspace">
-                        <input type="text" id="srcPlaces" style="width: 250px" placeholder="Source" required="required"/>
+                        <input type="text" id="srcPlaces" style="width: 250px" placeholder="Source" required="required" value="{% if form.source.value != None  %} {{form.source.value}} {% endif %}"/>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
                     <div class="text-center col-md-4 col-md-offset-4 rowspace">
-                        <input type="text" id="destPlaces" style="width: 250px" placeholder="Destination" required="required"/>
+                        <input type="text" id="destPlaces" style="width: 250px" placeholder="Destination" required="required" value="{% if form.destination.value != None  %} {{form.destination.value}} {% endif %}" />
                     </div>
                 </div>
             </div>
             <div class="text-center col-md-4 col-md-offset-4 rowspace">
-                <input type="submit" value="Submit" />
+                <button class="btn waves-effect waves-light" type="submit"> Search  <i class="material-icons right">search</i></button>
             </div>
         </form>
+         <div class="row">
+         <span style="cursor:pointer">
+         {% for ride in ride_offers %}
+      <div class="row">
+        <div class="col s12 m12">
+<ul class="collection" >
+    <li class="collection-item avatar">
+    {% for account in ride.user.user.socialaccount_set.all %}
+      <img src="{{ account.get_avatar_url }}" alt="" class="circle">
+      {% endfor %}
+              <span class="title">{{ ride.user.user.first_name   }} </span>
+              <p>Source: {{ ride.source }}</p>
+              <br/>
+        <p>Destination:{{ ride.destination }}</p>     <a href="#!" class="secondary-content" onclick="ridechosen({{ride.id}},this)"><i class="material-icons" >add</i></a>
+    </li></ul>
+    </div></div>
+     
+
+   
+             
+{% endfor %}</span>
+ <form method="post" action="/twift/show_available_rides/" class="form-horizontal">
+            {% csrf_token %}
+            {{ form1}}
+  </form>
+
+<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>  
+ 
+{% block customjs %}
+
+<script src = "{% static 'js/availRide.js' %}">
+  
+
+</script>
+
+{% endblock %}
         </div>
     </div>
 </div>

@@ -1,6 +1,25 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
-from .models import availRideModel, OfferRides, DriverUsers
+
+from .models import AvailRideModel,OfferRides,DriverUsers
+from django.utils import html
+
+
+class SubmitButtonWidget(forms.Widget):
+    def render(self, name, value, attrs=None):
+        return '<input type="submit" name="%s" value="%s">' % (html.escape(name), html.escape(value))
+
+
+class SubmitButtonField(forms.Field):
+    def __init__(self, *args, **kwargs):
+        if not kwargs:
+            kwargs = {}
+        kwargs["widget"] = SubmitButtonWidget
+
+        super(SubmitButtonField, self).__init__(*args, **kwargs)
+
+    def clean(self, value):
+        return value
 
 # If you don't do this you cannot use Bootstrap CSS
 class LoginForm(AuthenticationForm):
@@ -10,19 +29,32 @@ class LoginForm(AuthenticationForm):
                                widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'password'}))
 
 
-class availRide(forms.Form):
+class AvailRide(forms.Form):
 	
-	source = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'source'}))
-	destination = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'destination'}))
-	sourcex = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'sourcex'}))
-	sourcey = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'sourcey'}))
-	destinationx = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'destinationx'}))
-	destinationy = forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'destinationy'}))
-	duration =forms.CharField(widget=forms.HiddenInput(attrs={'class': 'form-control', 'name': 'duration','value':'0'}))
+	source = forms.CharField(widget=forms.HiddenInput(attrs={'class': 
+    'form-control', 'name': 'source'}))
+	destination = forms.CharField(widget=forms.HiddenInput(attrs={'class': 
+    'form-control', 'name': 'destination'}))
+	lat_src = forms.CharField(widget=forms.HiddenInput(attrs={'class': 
+    'form-control', 'name': 'lat_src'}))
+	lng_src = forms.CharField(widget=forms.HiddenInput(attrs={'class': 
+    'form-control', 'name': 'lng_src'}))
+	lat_dest = forms.CharField(widget=forms.HiddenInput(attrs={'class': 
+    'form-control', 'name': 'lat_dest'}))
+	lng_dest = forms.CharField(widget=forms.HiddenInput(attrs={'class': 
+    'form-control', 'name': 'lng_dest'}))
+	duration =forms.CharField(widget=forms.HiddenInput(attrs={'class': 
+    'form-control', 'name': 'duration','value':'0'}))
 	class Meta:
-		model = availRideModel
+		model = AvailRideModel
+class ChooseRides(forms.Form):
+  rideschoices = forms.CharField(widget=forms.HiddenInput(attrs={'class': 
+    'form-control', 'name': 'rideschoices','value':'[]'})) 
+  searchField = forms.CharField(widget=forms.HiddenInput(attrs={'class': 
+    'form-control', 'name': 'searchField'})) 
+  submit_button = SubmitButtonField(label="Choose Rides", initial=u"Choose Rides",disabled='true') 
 
-class OfferRideForm(forms.ModelForm):
+class OfferRideForm(forms.Form):
     CHOICES = (('1', '1',), ('2', '2',))
     source = forms.CharField(label="Source",
                              widget=forms.TextInput(attrs={'class': 'form-control'}))
