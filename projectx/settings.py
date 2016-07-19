@@ -29,12 +29,13 @@ SECRET_KEY = 'e#6)i(+&61g+-pjaym%ou9*d2=c_-*2)#w452ej%ocq(n5sxnv'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-SITE_ID=1
+SITE_ID = 1
 
 # Application definition
 
 INSTALLED_APPS = [
-    #Django apps
+
+    # Django apps
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',
@@ -49,10 +50,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
 
-    #Third party apps
+    # Third party apps
     'crispy_forms',
     'registration',
-    #My apps
+    # My apps
     'twift',
 
 ]
@@ -89,8 +90,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                #'allauth.account.context_processors.account',
-                #'allauth.socialaccount.context_processors.socialaccount'
+                # 'allauth.account.context_processors.account',
+                # 'allauth.socialaccount.context_processors.socialaccount'
 
                 'django.core.context_processors.media',
                 'django.core.context_processors.static',
@@ -111,9 +112,9 @@ SOCIALACCOUNT_PROVIDERS = {
         'LOCALE_FUNC': lambda request: 'en_US',
         'VERSION': 'v2.4'
     },
-    'google': { 
+    'google': {
         'SCOPE': ['email'],
-        'AUTH_PARAMS': { 'access_type': 'online' }
+        'AUTH_PARAMS': {'access_type': 'online'}
     }
 }
 WSGI_APPLICATION = 'projectx.wsgi.application'
@@ -122,34 +123,34 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'standard': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt' : "%d/%b/%Y %H:%M:%S"
+            'format': "[% (asctime)s] % (levelname)s [ % (name)s: % (lineno)s] % (message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
         },
     },
     'handlers': {
         'null': {
-            'level':'DEBUG',
-            'class':'logging.NullHandler',
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
         },
         'logfile': {
-            'level':'DEBUG',
-            'class':'logging.handlers.RotatingFileHandler',
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
             'filename': "logfile",
             'maxBytes': 50000,
             'backupCount': 2,
             'formatter': 'standard',
         },
-        'console':{
-            'level':'INFO',
-            'class':'logging.StreamHandler',
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
             'formatter': 'standard'
         },
     },
     'loggers': {
         'django': {
-            'handlers':['console'],
+            'handlers': ['console'],
             'propagate': True,
-            'level':'WARN',
+            'level': 'WARN',
         },
         'django.db.backends': {
             'handlers': ['console'],
@@ -167,15 +168,15 @@ LOGGING = {
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-      'default': {
-          'ENGINE': 'django.contrib.gis.db.backends.postgis',
-          'NAME': local_settings.DBNAME,
-          'USER': local_settings.DBUSER,
-          'PASSWORD': local_settings.DBPWORD,
-          'HOST': local_settings.DBHOST,
-          'PORT': local_settings.DBPORT,
-      }
-  }
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': local_settings.DBNAME,
+        'USER': local_settings.DBUSER,
+        'PASSWORD': local_settings.DBPWORD,
+        'HOST': local_settings.DBHOST,
+        'PORT': local_settings.DBPORT,
+    }
+}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Password validation
@@ -188,7 +189,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
-    {   
+    {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
@@ -201,7 +202,6 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-
 
 
 # Internationalization
@@ -225,18 +225,23 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
-#If a user want to access a method that that requires login and the user is not logged in then it will redirect the user to login page.
-#import django.contrib.auth
-#django.contrib.auth.LOGIN_URL = '/'
 
-#LOGIN_REDIRECT_URL = '/' # It means home view
+# If a user want to access a method that that requires login and the user is
+# not logged in then it will redirect the user to login page.
+# import django.contrib.auth
+# django.contrib.auth.LOGIN_URL = '/'
 
-#Django registration redux setting
-#REGISTRATION_OPEN = True # If True, users can register
-ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
-REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
-#LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
-                                # and are trying to access pages requiring authentication
+# LOGIN_REDIRECT_URL = '/' # It means home view
+
+# Django registration redux setting
+# REGISTRATION_OPEN = True # If True, users can register
+# One-week activation window; you may, of course, use a different value.
+ACCOUNT_ACTIVATION_DAYS = 7
+# If True, the user will be automatically logged in.
+REGISTRATION_AUTO_LOGIN = True
+# The page users are directed to if they are not logged in,
+# and are trying to access pages requiring authentication
+# LOGIN_URL = '/accounts/login/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -249,4 +254,3 @@ EMAIL_HOST_PASSWORD = 'S$E@mf45l'
 # for SSL only
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
